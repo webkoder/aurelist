@@ -2,6 +2,7 @@
   "name": "auralist",
   "version": "0.1.0",
   "private": true,
+  "homepage" : "https://webkoder.github.io/aurelist",
   "dependencies": {
     "crypto-js": "^3.1.9-1",
     "react": "^16.0.0",
@@ -12,6 +13,11 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build"
+  },
+    "devDependencies": {
+      "gh-pages": "^1.0.0"
   }
 }
