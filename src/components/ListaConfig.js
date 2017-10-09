@@ -9,6 +9,7 @@ export default class ListaConfig extends React.Component{
     }
     
     render(){
+        if( !this.lista ) return (<div></div>);
         return (
             <div className={this.props.className}>
                 <div className='lista'>
