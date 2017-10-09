@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import './css/starwars-glyphicons.css';
 import Item from './components/Item';
+import ListaConfig from './components/ListaConfig';
 
 class App extends Component {
   constructor(){
@@ -27,7 +28,7 @@ class App extends Component {
 
     this.addTexto = null;
 
-    this.state = { formClass: 'adicionarForm', items: this.items, tipo: '' };
+    this.state = { formClass: 'adicionarForm', configClass: 'listaconfig', items: this.items, tipo: '' };
     
   }
 
@@ -36,6 +37,7 @@ class App extends Component {
   }
 
   fecharForm(){
+    this.limparAddForm();
     this.setState({formClass: 'adicionarForm'});
   }
 
@@ -71,22 +73,26 @@ class App extends Component {
         novo.dia = dia;
         delete novo['updater'];
         delete novo['refs'];
-        delete novo['tipobgs'];
        
         this.items.push(novo);
         let novoItem = JSON.stringify(this.items);
         localStorage.setItem('items', novoItem);
-        if(tipo === 'semanal'){
-            this.diasemana.value = 0;
-        }else if(tipo === 'mensal'){
-            this.diames.value = 0;
-        }
 
-        this.setState({items: this.items, tipo: ''});
-        this.addTexto.value = '';
-
-
+        this.setState({items: this.items});
+        
         this.fecharForm();
+  }
+
+  limparAddForm(){
+    if(this.state.tipo === 'semanal'){
+      this.diasemana.value = 0;
+    }else if(this.state.tipo === 'mensal'){
+        this.diames.value = 0;
+    }
+
+    this.setState({tipo: ''});
+    this.addTexto.value = '';
+
   }
 
   setTipo(e){
@@ -94,11 +100,19 @@ class App extends Component {
     this.setState({tipo: valor});
   }
 
+  mostrarConfigLista(){
+    if( this.state.configClass === 'listaconfig mostrarlistaconfig' )
+      this.setState({configClass: 'listaconfig'});
+    else
+      this.setState({configClass: 'listaconfig mostrarlistaconfig'});
+  }
+
   render() {
     return (
       <div className="App">
         <header>
           <button onClick={() => this.mostrarForm()}> + Adicionar</button>
+          <button onClick={() => this.mostrarConfigLista()} style={{float:'right'}}> config</button>
         </header>
         <div className={this.state.formClass}>
           <section>
@@ -107,13 +121,13 @@ class App extends Component {
             <h2>Tipo</h2>            
           </section>
           <div className='tipo'>
-            <label>
+            <label className='diario'>
               <input type='radio' name='tipo' value='diario' checked={this.state.tipo === 'diario'} onChange={e => this.setTipo(e)} /> Diario
             </label>
-            <label>
+            <label className='semanal'>
               <input type='radio' name='tipo' value='semanal' checked={this.state.tipo === 'semanal'} onChange={e => this.setTipo(e)} /> Semanal
             </label>
-            <label>
+            <label className='mensal'>
               <input type='radio' name='tipo' value='mensal' checked={this.state.tipo === 'mensal'} onChange={e => this.setTipo(e)} /> Mensal
             </label>
           </div>
@@ -147,6 +161,7 @@ class App extends Component {
             return (<Item key={i} objeto={item} />)
            }) }
         </div>
+        <ListaConfig className={this.state.configClass} />
       </div>
     );
   }

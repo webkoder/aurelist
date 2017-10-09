@@ -1,10 +1,8 @@
 import React, { Component } from 'react';
 
-export default class Item extends Component{
+export default class ItemConfig extends Component{
     constructor(){
         super();
-        // this.id = this.props.id;
-        // this.valor = this.props.valor;
         this.id = 0;
         this.valor = '';
         this.tipo = '';
@@ -22,23 +20,6 @@ export default class Item extends Component{
         this.setState({status: this.status});
     }
 
-    exibir(){
-        if(this.tipo === 'mensal'){
-            let hoje = new Date();
-            if (hoje.getDate() !== this.dia){
-                return false;
-            }
-        }else if(this.tipo === 'semanal'){
-            let hoje = new Date();
-            let dsemana = hoje.getDay() + 1;
-            if( dsemana !==  this.dia){
-                return false;
-            }
-        }
-
-        return true;
-    }
-
     feito(){
         let items = JSON.parse( localStorage.getItem('items') );
         for (var i = 0; i < items.length; i++) {
@@ -54,21 +35,18 @@ export default class Item extends Component{
     }
 
     render(){
-        if( !this.exibir() ) return (<div />);
         return (
-            <div className="item">
+            <div className="itemconfig">
                 <div className={this.tipo}>
                     <span>{this.tipo}</span>
-                    { this.state.status === 0 &&
-                        <button onClick={() => this.feito()}>Feito</button>
-                    }
-                    { this.state.status === 1 &&
-                        <button>ok</button>
-                    }
                 </div>
-                <p>
-                {this.valor}
-                </p>
+                <div>
+                    {this.valor}
+                </div>
+                <footer>
+                    {/* <button>remover</button>
+                    <button>editar</button> */}
+                </footer>
             </div>
         )
     }
