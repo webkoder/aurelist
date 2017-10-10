@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import './css/starwars-glyphicons.css';
 import Item from './components/Item';
 import ListaConfig from './components/ListaConfig';
+import Hoje from './components/Hoje';
 
 class App extends Component {
   constructor(){
@@ -11,8 +12,7 @@ class App extends Component {
       this.items = [] :
       JSON.parse( localStorage.getItem('items') );
 
-    let hoje = new Date();
-    let dia = hoje.getDate();
+    let dia = new Date().getDate();
     let udia = JSON.parse(localStorage.getItem('dia'));
     if( udia !== null ){
         if( udia !== dia ){ // se o dia for diferente de hoje, precisa limpar a lista
@@ -29,8 +29,7 @@ class App extends Component {
 
     this.addTexto = null;
 
-    this.state = { formClass: 'adicionarForm', configClass: 'listaconfig', items: this.items, tipo: ''
-    , hoje: dia };
+    this.state = { formClass: 'adicionarForm', configClass: 'listaconfig', items: this.items, tipo: '' };
     
   }
 
@@ -116,7 +115,7 @@ class App extends Component {
           <button onClick={() => this.mostrarForm()}> + Adicionar</button>
           <button onClick={() => this.mostrarConfigLista()} style={{float:'right'}}> config</button>
         </header>
-        <p>{this.state.hoje}</p>
+        <Hoje />
         <div className={this.state.formClass}>
           <section>
             <h2>novo item</h2>

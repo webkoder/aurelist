@@ -175,3 +175,12 @@ button{
   left: 0px;
   transition: 0.5s all ease-out
 }
+
+/* Frase */
+.frase{
+  padding: 10px;
+  background: #2a054d;
+  color: #dfbdfe;
+  margin-top: -10px;
+  margin-bottom: 10px
+}
