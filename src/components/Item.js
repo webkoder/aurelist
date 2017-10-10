@@ -31,7 +31,7 @@ export default class Item extends Component{
         }else if(this.tipo === 'semanal'){
             let hoje = new Date();
             let dsemana = hoje.getDay() + 1;
-            if( dsemana !==  this.dia){
+            if( dsemana !==  parseInt( this.dia ) ){
                 return false;
             }
         }
