@@ -9,6 +9,15 @@ body {
   text-transform: uppercase
 }
 
+.App{
+  overflow: hidden;
+  display: flex
+}
+
+.App div{
+  flex:1 0 100%
+}
+
 header{
   padding: 10px;
   margin-bottom: 10px;
@@ -163,16 +172,15 @@ button{
 }
 
 .listaconfig{
-  position: absolute;
-  top: 70px;
   width: 100%;
   background: #FFFFFF;
   left: 100%;
-  transition: 0.5s all ease-out
+  transition: 0.5s all ease-out;
+  margin-top: 112px
 }
 
 .mostrarlistaconfig{
-  left: 0px;
+  margin-left: -100%;
   transition: 0.5s all ease-out
 }
 

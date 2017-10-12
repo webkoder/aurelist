@@ -14,13 +14,31 @@ export default class Hoje extends Component{
         let hoje = new Date();
         
         let frase = `Hoje dia ${hoje.getDate()} de ${meses[hoje.getMonth() - 1]} de ${hoje.getFullYear()}, ${dsemana[hoje.getDay()]}`;
-        this.state = {frase};
+        this.state = {frase, qod: ''};
+    }
+
+    componentWillMount(){
+        let headers = new Headers({
+            "Content-Type": "application/json"
+        });
+        fetch('http://quotes.rest/qod', headers)
+            .then(response => response.json())
+            .then(qod => this.setFraseDoDia(qod))
+            .catch(error=>console.log(error));
+    }
+
+    setFraseDoDia(o){
+        let qod = o.contents.quotes[0].quote + ' - ' + o.contents.quotes[0].author;
+        this.setState({qod});
     }
     
     render(){
         return (
             <div className="frase">
-                {this.state.frase};
+                {this.state.frase}
+                <br />
+                Frase do Dia:<br />
+                {this.state.qod}
             </div>
         )
     }

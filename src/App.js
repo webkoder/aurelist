@@ -111,59 +111,63 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <header>
-          <button onClick={() => this.mostrarForm()}> + Adicionar</button>
-          <button onClick={() => this.mostrarConfigLista()} style={{float:'right'}}> config</button>
-        </header>
-        <Hoje />
-        <div className={this.state.formClass}>
-          <section>
-            <h2>novo item</h2>
-            <input ref={ o=> this.addTexto = o} type='text' placeholder='digite um novo item' />
-            <h2>Tipo</h2>            
-          </section>
-          <div className='tipo'>
-            <label className='diario'>
-              <input type='radio' name='tipo' value='diario' checked={this.state.tipo === 'diario'} onChange={e => this.setTipo(e)} /> Diario
-            </label>
-            <label className='semanal'>
-              <input type='radio' name='tipo' value='semanal' checked={this.state.tipo === 'semanal'} onChange={e => this.setTipo(e)} /> Semanal
-            </label>
-            <label className='mensal'>
-              <input type='radio' name='tipo' value='mensal' checked={this.state.tipo === 'mensal'} onChange={e => this.setTipo(e)} /> Mensal
-            </label>
+        <div className="Main">
+          <header>
+            <button onClick={() => this.mostrarForm()}> + Adicionar</button>
+            <button onClick={() => this.mostrarConfigLista()} style={{float:'right'}}> config</button>
+          </header>
+          <Hoje />
+          <div className={this.state.formClass}>
+            <section>
+              <h2>novo item</h2>
+              <input ref={ o=> this.addTexto = o} type='text' placeholder='digite um novo item' />
+              <h2>Tipo</h2>            
+            </section>
+            <div className='tipo'>
+              <label className='diario'>
+                <input type='radio' name='tipo' value='diario' checked={this.state.tipo === 'diario'} onChange={e => this.setTipo(e)} /> Diario
+              </label>
+              <label className='semanal'>
+                <input type='radio' name='tipo' value='semanal' checked={this.state.tipo === 'semanal'} onChange={e => this.setTipo(e)} /> Semanal
+              </label>
+              <label className='mensal'>
+                <input type='radio' name='tipo' value='mensal' checked={this.state.tipo === 'mensal'} onChange={e => this.setTipo(e)} /> Mensal
+              </label>
+            </div>
+            { this.state.tipo === 'semanal' &&
+              <section>
+                  <h3>Dia da semana</h3>
+                  <select ref={o => this.diasemana = o}>
+                  <option value='1'>Domingo</option>
+                  <option value='2'>Segunda-feira</option>
+                  <option value='3'>Terça-feira</option>
+                  <option value='4'>Quarta-feira</option>
+                  <option value='5'>Quinta-feira</option>
+                  <option value='6'>Sexta-feira</option>
+                  <option value='7'>Sábado</option>
+                  </select>
+              </section>
+          }
+          { this.state.tipo === 'mensal' &&
+              <section>
+              <h3>Dia do mes</h3>
+              <input ref={o => this.diames = o} type='number' max='31' min='1' />
+              </section>
+          }
+            <footer>
+              <button className="btn-danger" onClick={() => this.fecharForm()}>fechar</button>
+              <button className="btn-success" onClick={() => this.adicionar()}>adicionar</button>
+            </footer>
           </div>
-          { this.state.tipo === 'semanal' &&
-            <section>
-                <h3>Dia da semana</h3>
-                <select ref={o => this.diasemana = o}>
-                <option value='1'>Domingo</option>
-                <option value='2'>Segunda-feira</option>
-                <option value='3'>Terça-feira</option>
-                <option value='4'>Quarta-feira</option>
-                <option value='5'>Quinta-feira</option>
-                <option value='6'>Sexta-feira</option>
-                <option value='7'>Sábado</option>
-                </select>
-            </section>
-         }
-         { this.state.tipo === 'mensal' &&
-            <section>
-            <h3>Dia do mes</h3>
-            <input ref={o => this.diames = o} type='number' max='31' min='1' />
-            </section>
-         }
-          <footer>
-            <button className="btn-danger" onClick={() => this.fecharForm()}>fechar</button>
-            <button className="btn-success" onClick={() => this.adicionar()}>adicionar</button>
-          </footer>
+          <div className="lista">
+            {  this.state.items.map( (item, i) => { 
+              return (<Item key={i} objeto={item} />)
+            }) }
+          </div>
         </div>
-        <div className="lista">
-          {  this.state.items.map( (item, i) => { 
-            return (<Item key={i} objeto={item} />)
-           }) }
+        <div className="config">
+          <ListaConfig className={this.state.configClass} />
         </div>
-        <ListaConfig className={this.state.configClass} />
       </div>
     );
   }
