@@ -23,6 +23,9 @@ export default class ListaConfig extends React.Component{
                 <div>
                     <Link to="/" className="botao right">Voltar</Link>
                 </div>
+                <div>
+                    <Link to="/caracteres" className="botao right">Lista de caracteres</Link>
+                </div>
                 <div>                
                     <Adicionar />
                 </div>

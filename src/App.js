@@ -3,6 +3,7 @@ import './css/starwars-glyphicons.css';
 import ListaConfig from './components/ListaConfig';
 import Header from './components/Header';
 import Main from './components/Main';
+import Caracteres from './components/Caracteres';
 import { BrowserRouter, Switch, Route } from 'react-router-dom'
 
 class App extends Component {
@@ -31,24 +32,6 @@ class App extends Component {
     this.addTexto = null;
 
     this.state = { formClass: 'adicionarForm', configClass: 'listaconfig', items: this.items };
-    
-  }
-
-  mostrarForm(){
-    this.setState({formClass: 'adicionarForm mostrarForm'});
-  }
-
-  fecharForm(){
-    this.limparAddForm();
-    this.setState({formClass: 'adicionarForm'});
-  }
-
-  
-  mostrarConfigLista(){
-    if( this.state.configClass === 'listaconfig mostrarlistaconfig' )
-      this.setState({configClass: 'listaconfig'});
-    else
-      this.setState({configClass: 'listaconfig mostrarlistaconfig'});
   }
 
   render() {
@@ -59,6 +42,7 @@ class App extends Component {
             <Switch> 
                 <Route  path="/" exact component={ Main }/>
                 <Route  path="/config" component={ ListaConfig }/>  
+                <Route  path="/caracteres" component={ Caracteres }/>  
            </Switch> 
         </div>
         </BrowserRouter >

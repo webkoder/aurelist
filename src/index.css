@@ -179,3 +179,24 @@ button{
   margin-top: -10px;
   margin-bottom: 10px
 }
+
+/* Caracteres */
+.caracteres{
+  margin: 10px;
+  font-size: 36px
+}
+
+.caracteres div{
+  border: 1px solid #cccccc;
+  float:left;
+  padding: 10px;
+  margin: 0 5px 5px 0
+}
+
+.caracteres div span{
+  display: block
+}
+
+.caracteres div span:last-child{
+  font-family: sans-serif
+}
