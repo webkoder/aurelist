@@ -9,10 +9,6 @@ body {
   text-transform: uppercase
 }
 
-.App{
-  overflow: hidden;
-  display: flex
-}
 
 .App div{
   flex:1 0 100%
@@ -21,7 +17,17 @@ body {
 header{
   padding: 10px;
   margin-bottom: 10px;
-  background: #240038
+  background: #240038;
+  height: 30px
+}
+
+.botao{
+  background: #e80054;
+  padding: 5px 15px;
+  color: #FFFFFF;
+  border-radius: 3px;
+  float:right;
+  text-decoration: none
 }
 
 button{
