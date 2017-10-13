@@ -27,7 +27,7 @@ export default class Hoje extends Component{
         let headers = new Headers({
             "Content-Type": "application/json"
         });
-        fetch('http://quotes.rest/qod', headers)
+        fetch('https://quotes.rest/qod', headers)
             .then(response => response.json())
             .then(qodres => this.setFraseDoDia(qodres))
             .catch(error=>console.log(error));
