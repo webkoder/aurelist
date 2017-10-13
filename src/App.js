@@ -24,6 +24,7 @@ class App extends Component {
             }
             localStorage.setItem('items', JSON.stringify(this.items) );
             localStorage.setItem('dia', dia );
+            localStorage.removeItem('qod');
         }
     }else{
         localStorage.setItem('dia', dia );        

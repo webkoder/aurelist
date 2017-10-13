@@ -18,18 +18,25 @@ export default class Hoje extends Component{
     }
 
     componentWillMount(){
-        // let headers = new Headers({
-        //     "Content-Type": "application/json"
-        // });
-        // fetch('http://quotes.rest/qod', headers)
-        //     .then(response => response.json())
-        //     .then(qod => this.setFraseDoDia(qod))
-        //     .catch(error=>console.log(error));
+        let qod = localStorage.getItem('qod');
+        if( qod ){
+            console.log('qod recuperado');
+            this.setState({qod});
+            return;
+        }
+        let headers = new Headers({
+            "Content-Type": "application/json"
+        });
+        fetch('http://quotes.rest/qod', headers)
+            .then(response => response.json())
+            .then(qodres => this.setFraseDoDia(qodres))
+            .catch(error=>console.log(error));
     }
 
     setFraseDoDia(o){
         let qod = o.contents.quotes[0].quote + ' - ' + o.contents.quotes[0].author;
         this.setState({qod});
+        localStorage.setItem('qod', qod);
     }
     
     render(){
