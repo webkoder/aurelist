@@ -6,7 +6,7 @@ export default class Header extends Component {
     render() {
         return (
           <header>
-            <Link to="/config" className="botao">
+            <Link to="/config" className="botao right">
               config
             </Link>
           </header>

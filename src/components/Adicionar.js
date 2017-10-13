@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Item from './Item';
+import PubSub from 'pubsub-js';
 
 export default class Adicionar extends Component {
 
@@ -52,21 +53,23 @@ export default class Adicionar extends Component {
             console.log('digite um item');
             return;
         }
+
+        let items = JSON.parse(localStorage.getItem('items'));
+
         let novo = new Item();
-        novo.id = this.items.length;
+        novo.id = items.length;
         novo.valor = valor;
         novo.tipo = tipo;
         novo.dia = dia;
         delete novo['updater'];
         delete novo['refs'];
        
-        this.items.push(novo);
-        let novoItem = JSON.stringify(this.items);
+        items.push(novo);
+        let novoItem = JSON.stringify(items);
         localStorage.setItem('items', novoItem);
 
-        this.setState({items: this.items});
-        
-        this.fecharForm();
+        this.limparAddForm();
+        PubSub.publish('lista-atualizada', items);
     }
     
 
